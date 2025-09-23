@@ -1,0 +1,20 @@
+# Python-generated files
+__pycache__/
+
+# Virtual environments
+.venv
+
+
+# Airflow
+standalone_admin_password.txt
+simple_auth_manager_passwords.json.generated
+logs/
+airflow.db
+airflow.db-shm
+airflow.db-wal
+airflow.cfg
+airflow-webserver.pid
+webserver_config.py
+
+# Pycharm
+.idea/
