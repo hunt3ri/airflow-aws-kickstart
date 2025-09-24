@@ -31,7 +31,7 @@ To successfully run the AWS Kickstart DAG the AWS Profile you supplied in the `a
 1. Click the Dags icon on the left hand side
 2. Select the `aws_kickstart` DAG, and select `Trigger` in the top right hand corner.  The DAG Parameters popup will launch.  
 3. You can toggle the List All Buckets button, if you set it to False you must supply the name of the bucket you want to list in the S3 Bucket Name fields instead.  Click `Trigger` to start the DAG run.
-4. When running click on the logs icon to the see the output of the DAG run
+4. When running click on the `list_buckets` task id and you should see buckets listed in the logs.
 
 ### Airflow Config
 Config for Airflow is located in `airflow.cfg`  Config can be overridden using environment variables as demonstrated in the `airflow_init.sh` script.
