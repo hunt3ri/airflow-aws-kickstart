@@ -1,21 +1,31 @@
 import logging
 
 import boto3
+from services.utils import get_streaming_logger
 
-logger = logging.getLogger("ssm_service")
+logger = get_streaming_logger("s3_service")
 
 class S3Service:
 
     s3_client = None
     dag_params: dict = None
+    logger: logging.Logger = None
 
     @classmethod
-    def from_airflow_task(cls, dag_params: dict) -> "S3Service":
+    def from_airflow_task(cls, dag_params: dict, is_called_from_venv: bool = False) -> "S3Service":
         """Create an instance of SSMService from an Airflow task"""
         # Instantiate the boto client in at the class level to avoid pickle issues with Airflow
         logger.info("Creating S3Service from Airflow task")
         cls.s3_client = boto3.client('s3')
         cls.dag_params = dag_params
+
+        if is_called_from_venv:
+            # If called from a virtualenv task, set up a streaming logger
+            cls.logger = get_streaming_logger("s3_service_venv")
+        else:
+            cls.logger = logging.getLogger("s3_service")
+
+
         return cls()
 
     def handle_request(self) -> None:
